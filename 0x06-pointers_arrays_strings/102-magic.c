@@ -1,10 +1,5 @@
 #include <stdio.h>
 
-/**
-* main - function that print 95
-* Return: 0
-*/
-
 int main(void)
 {
 	int n;
