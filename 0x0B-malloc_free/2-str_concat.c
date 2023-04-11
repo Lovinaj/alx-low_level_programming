@@ -1,40 +1,68 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
+/**
+ * _strlen - return length of a string
+ *
+ * @s: char type
+ * Return:  length of string
+ */
+int _strlen(char *s)
+{
+	int a;
+
+	for (a = 0; s[a] != '\0'; a++)
+	;
+	return (a);
+}
+/**
+ * _strncat - function to concatnate strings with n bytes
+ *
+ * @dest: destination for concatnation
+ * @src: source of string
+ * @n: int type for size of byte
+ * Return: dest
+ */
+char *_strncat(char *dest, char *src, int n)
+{
+	int dest_len, a;
+
+	dest_len = _strlen(dest);
+	for (a = 0; a < n && src[a] != '\0'; a++)
+		dest[dest_len + a] = src[a];
+	return (dest);
+}
 
 /**
- * **alloc_grid - function to allocate memory to grid
- * @width: int type
- * @height: int type
- * Return: grid of 0s
+ * *str_concat - function to allocate space for sting concatnation
+ * @s1: array pointer to destination of string
+ * @s2: array pointer to source of string
+ * Return: return pointer to copy of string
  */
-int **alloc_grid(int width, int height)
-{
-	int x, y;
-	int **ptr;
 
-	if (width <= 0 || height <= 0)
+char *str_concat(char *s1, char *s2)
+{
+	char *ptr;
+	int size1, size2;
+
+	if (s1 == NULL)
 	{
-		return  (NULL);
+		s1 = "";
 	}
-	ptr = malloc(height * sizeof(int *));
+	if (s2 == NULL)
+	{
+		s2 = "";
+	}
+	size1 = _strlen(s1);
+	size2 = _strlen(s2);
+
+	ptr = malloc(((size1 + size2) + 1) * sizeof(char));
 	if (ptr == NULL)
 	{
 		return (NULL);
 	}
-	for (x = 0; x < height; x++)
-	{
-		ptr[x] = malloc(width * sizeof(int));
-		if (ptr[x] == NULL)
-		{
-			for (y = 0; y < x;  y++)
-				free(ptr[y]);
-			free(ptr);
-			return (NULL);
-		}
-		for (y = 0; y < width; y++)
-		{
-			ptr[x][y] = 0;
-		}
-	}
+	_strncat(ptr, s1, size1);
+	_strncat(ptr, s2, size2);
+	ptr += '\0';
 	return (ptr);
 }
