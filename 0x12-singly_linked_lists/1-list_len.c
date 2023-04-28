@@ -1,3 +1,4 @@
+#include "stdlib.h"
 #include "lists.h"
 /**
 * list_len - a function that returns the number
